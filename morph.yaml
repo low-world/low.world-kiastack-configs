@@ -1,0 +1,24 @@
+workers: 1
+pki_path: /opt/local/lw/
+
+web:
+  static_dir: /srv/persist/lw/
+  rewrites:
+    /: /index.html
+    /about: /index.html
+    /contact: /contact.html
+  session:
+    enabled: false
+  headers:
+    cache-control: "max-age: '1200'"
+    referrer-policy: "strict-origin-when-cross-origin"
+    cross-origin-opener-policy: "same-origin"
+    cross-origin-embedder-policy: "require-corp"
+    content-security-policy: "style-src 'self' 'unsafe-inline' https:;img-src 'self' data: https:;connect-src 'self' https:;object-src 'none';base-uri 'none';frame-ancestors 'none';form-action 'self';upgrade-insecure-requests;"
+    permissions-policy: "geolocation=(),camera=(),microphone=(),payment=(),usb=(),fullscreen=(self)"
+    strict-transport-security: "max-age=63072000; includeSubDomains; preload"
+listeners:
+  - port: 3445
+    tls:
+      cert_path: /opt/local/lw/cert.pem
+      key_path: /opt/local/lw/key.pem
